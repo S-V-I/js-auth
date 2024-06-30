@@ -3,29 +3,47 @@ const express = require('express')
 // Cтворюємо роутер - місце, куди ми підключаємо ендпоїнти
 const router = express.Router()
 
-const Test = require('../class/test')
+const { User } = require('../class/user')
 
 // ================================================================
 
 // router.get Створює нам один ентпоїнт
 
 // ↙️ тут вводимо шлях (PATH) до сторінки
-router.get('/', function (req, res) {
+router.get('/signup', function (req, res) {
   // res.render генерує нам HTML сторінку
 
   // ↙️ cюди вводимо назву файлу з сontainer
-  res.render('nav', {
+  res.render('signup', {
     // вказуємо назву контейнера
-    name: 'nav',
+    name: 'signup',
     // вказуємо назву компонентів
-    component: [],
+    component: [
+      'back-button',
+      'field',
+      'field-password',
+      'field-select',
+      'field-checkbox',
+    ],
 
     // вказуємо назву сторінки
-    title: 'Nav',
+    title: 'Signup page',
     // ... сюди можна далі продовжувати додавати потрібні технічні дані, які будуть використовуватися в layout
 
     // вказуємо дані,
-    data: {},
+    data: {
+      role: [
+        { value: User.USER_ROLE.USER, text: 'Користувач' },
+        {
+          value: User.USER_ROLE.ADMIN,
+          text: 'Адміністратор',
+        },
+        {
+          value: User.USER_ROLE.DEVELOPER,
+          text: 'Розробник',
+        },
+      ],
+    },
   })
   // ↑↑ сюди вводимо JSON дані
 })
