@@ -1,5 +1,5 @@
 class Confirm {
-  static #List = []
+  static #list = []
 
   constructor(data) {
     this.code = Confirm.generateCode()
@@ -10,27 +10,27 @@ class Confirm {
     Math.floor(Math.random() * 9000) + 1000
 
   static create = (data) => {
-    this.#List.push(new Confirm(data))
+    this.#list.push(new Confirm(data))
 
     setTimeout(() => {
       this.delete(code)
     }, 24 * 60 * 60 * 1000) // 24 hours in ms
 
-    console.log(this.#List)
+    console.log(this.#list)
   }
 
   static delete = (code) => {
-    const length = this.#List
+    const length = this.#list
 
-    this.#List = this.#List.filter(
+    this.#list = this.#list.filter(
       (item) => item.code !== code,
     )
 
-    return length > this.#List.length
+    return length > this.#list.length
   }
 
   static getData = (code) => {
-    const obj = this.#List.find(
+    const obj = this.#list.find(
       (item) => item.code === code,
     )
 
